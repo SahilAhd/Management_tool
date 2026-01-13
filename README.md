@@ -6,7 +6,8 @@
 * Git
 * after getting into main folder go to frontend folder and run "npm install" to haveall fdependecies (incase if it won't work)
   
-  Management System_Full Stack
+
+@Management_System
 
 Management System is a web application built with the MERN (MongoDB, Express.js, React.js, Node.js) stack, designed to showcase robust user authentication, dynamic content display, secure file management, and insightful user-specific data tracking. This project is optimized for performance, scalability, and maintainability, providing a solid foundation for enterprise-level applications.
 
