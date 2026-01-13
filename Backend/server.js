@@ -11,34 +11,29 @@ const bodyParser = require("body-parser");
 require('dotenv').config();
 const User = require('./Model/Schema');
 const path = require('path');
-const morgan = require('morgan'); // <--- NEW: Import morgan here
+const morgan = require('morgan'); 
 
-// --- NEW IMPORTS FOR GEMINI AI ---
+
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require('@google/generative-ai');
 
-// Middlewares
+
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan('dev')); // <--- NEW: Use morgan middleware here. 'dev' is a concise log format.
+app.use(morgan('dev')); 
 
-// Static folder for uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// --- NEW: Initialize Gemini AI ---
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY; // Securely load API key from .env
+
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY; 
 if (!GEMINI_API_KEY) {
-  // CRITICAL: Exit if API key is not found. Server cannot function without it.
+  
   console.error("CRITICAL ERROR: GEMINI_API_KEY is not set in your .env file!");
   process.exit(1);
 }
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-// Choose a Gemini model. 'gemini-1.5-flash-latest' is a good choice for fast, capable responses.
 const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
-// Define safety settings for content generation (Highly Recommended)
-// These settings prevent the AI from generating harmful content.
-// Adjust thresholds based on your application's requirements.
 const safetySettings = [
   {
     category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -58,12 +53,11 @@ const safetySettings = [
   },
 ];
 
-// Define generation configuration (how the AI generates responses)
 const generationConfig = {
   temperature: 0.8,     // Controls randomness/creativity (0.0-1.0). Higher = more creative.
-  topP: 0.95,           // Nucleus sampling parameter.
-  topK: 64,             // Top-k sampling parameter.
-  maxOutputTokens: 200, // Maximum length of the AI's response in tokens.
+  topP: 0.95,         
+  topK: 64,             
+  maxOutputTokens: 200, 
 };
 
 

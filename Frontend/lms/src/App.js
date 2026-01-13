@@ -4,6 +4,7 @@ import './App.css';
 import background from "./assets/Welcome-to-Bazaar.com.png";
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+
 import Footer from './Components/footer.jsx'
 import Userp from './Components/Userp.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -23,7 +24,7 @@ function Homepage() {
 
   const hasSpoken = useRef(false);
 
-  // ✅ AI GREETING VOICE LOGIC (Existing logic)
+  
   useEffect(() => {
     if (hasSpoken.current) return;
 
